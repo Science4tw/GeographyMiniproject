@@ -13,7 +13,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 /**
@@ -24,12 +26,18 @@ import javafx.stage.Stage;
  * @author Brad Richards
  */
 public class App_View extends View<App_Model> {
+	// CONTROLS Menu
     Menu menuFile;
     Menu menuFileLanguage;
     Menu menuHelp;
     
+    // CONTROLS Buttonclick
     Label lblNumber;
     Button btnClick;
+    
+    // CONTROLS
+	private Label countryLabel, stateLabel, cityLabel;
+	private TextField countryField, stateField, cityField;
 
 	public App_View(Stage stage, App_Model model) {
         super(stage, model);
@@ -66,11 +74,13 @@ public class App_View extends View<App_Model> {
         lblNumber.setText(Integer.toString(model.getValue()));
         lblNumber.setMinWidth(200);
         lblNumber.setAlignment(Pos.BASELINE_CENTER);
-        root.add(lblNumber, 0, 1);
+        root.add(lblNumber, 10, 1);
         
         btnClick = new Button();
         btnClick.setMinWidth(200);
-        root.add(btnClick, 0, 2);
+        root.add(btnClick, 10, 2);
+        
+        root.add(createAddPane(), 1, 5);
         
         updateTexts();
 		
@@ -93,4 +103,21 @@ public class App_View extends View<App_Model> {
            
            stage.setTitle(t.getString("program.name"));
 	    }
+	   
+	   public Pane createAddPane() {
+			GridPane grid = new GridPane();
+			
+			// Label & TextField für Country
+			countryLabel = new Label("Country : ");
+			grid.add(this.countryLabel, 1, 1);		
+			countryField = new TextField();
+			grid.add(this.countryField, 2, 1);
+
+			// Label & TextField für State
+			stateLabel = new Label("State : ");
+			grid.add(this.stateLabel, 1, 2);		
+			stateField = new TextField();
+			grid.add(this.stateField, 2, 2);
+			return grid;
+		}   
 }
