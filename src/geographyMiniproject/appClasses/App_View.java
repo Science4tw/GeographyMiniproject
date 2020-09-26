@@ -107,13 +107,13 @@ public class App_View extends View<App_Model> {
 	   public Pane createAddPane() {
 			GridPane grid = new GridPane();
 			
-			// Label & TextField für Country
+			// Label & TextField fuer Country
 			countryLabel = new Label("Country : ");
 			grid.add(this.countryLabel, 1, 1);		
 			countryField = new TextField();
 			grid.add(this.countryField, 2, 1);
 
-			// Label & TextField für State
+			// Label & TextField fï¿½r State
 			stateLabel = new Label("State : ");
 			grid.add(this.stateLabel, 1, 2);		
 			stateField = new TextField();
