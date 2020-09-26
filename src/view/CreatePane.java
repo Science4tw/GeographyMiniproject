@@ -1,6 +1,7 @@
 package view;
 
 import controller.Geography_Controller;
+import exceptions.EmptyFieldException;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
@@ -11,6 +12,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import model.Country;
+import model.DevelopmentStatus;
 import model.FormOfGovernment;
 import model.Nation;
 
@@ -61,16 +63,70 @@ public class CreatePane extends GridPane {
 		this.dictatorshipButton = new RadioButton(FormOfGovernment.values()[1].name());
 		this.monarchyButton = new RadioButton(FormOfGovernment.values()[2].name());
 		this.democracyButton.setSelected(true);
-		ToggleGroup tg = new ToggleGroup();
-		this.democracyButton.setToggleGroup(tg);
-		this.dictatorshipButton.setToggleGroup(tg);
-		this.monarchyButton.setToggleGroup(tg);
+		ToggleGroup fOGGroup = new ToggleGroup();
+		this.democracyButton.setToggleGroup(fOGGroup);
+		this.dictatorshipButton.setToggleGroup(fOGGroup);
+		this.monarchyButton.setToggleGroup(fOGGroup);
 		this.formOfGovernmentBox = new HBox();
 		this.formOfGovernmentBox.getChildren().addAll(this.democracyButton, this.dictatorshipButton, this.monarchyButton);
-		this.add(formOfGovernmentBox, 2, 2);
+		this.add(this.formOfGovernmentBox, 2, 2);
 		
 		// RadioButton zur Auswahl des DevelopmentStatus (in HBox organisiert)
+		this.add(this.lblDevelopmentStatus, 1, 3); // Label
+		this.industrialNationButton = new RadioButton(DevelopmentStatus.values()[0].name()); // Liest den ersten(0) Wert des Enums FormOfGovernment aus und speichert diesen unter democrayButton
+		this.emergingNationButton = new RadioButton(DevelopmentStatus.values()[1].name());
+		this.thirdworldNationButton = new RadioButton(DevelopmentStatus.values()[2].name());
+		this.industrialNationButton.setSelected(true);		
+		ToggleGroup dSGroup = new ToggleGroup();
+		this.industrialNationButton.setToggleGroup(dSGroup);
+		this.emergingNationButton.setToggleGroup(dSGroup);
+		this.thirdworldNationButton.setToggleGroup(dSGroup);
+		this.developmentStatusBox = new HBox();
+		this.developmentStatusBox.getChildren().addAll(this.industrialNationButton, this.emergingNationButton, this.thirdworldNationButton);
+		this.add(this.developmentStatusBox, 2, 3);
 		
+		
+		// Button zum hinzufuegen der Objekte
+		this.createButton = new Button("CREATE Object");
+		this.add(this.createButton, 2, 8);
+//		this.createButton.setOnAction(controller::createNewObject);
+	}
+	
+	/**
+	 * GETTER
+	 * um die Kontrollelemente der CreatePane auszulesen
+	 * und mit den ausgewählten Werten ein neues Objekt zu erstellen
+	 */
+	public Country getObject() throws Exception{
+		Nation nation = this.nationChoiceBox.getSelectionModel().getSelectedItem();
+		if (nation == null)
+			throw new EmptyFieldException("No nation selected");
+		
+		FormOfGovernment formOfGovernment = null;
+		if(this.democracyButton.isSelected())
+			formOfGovernment = FormOfGovernment.DEMOCRACY;
+		if(this.dictatorshipButton.isSelected())
+			formOfGovernment = FormOfGovernment.DICTATORSHIP;
+		if(this.monarchyButton.isSelected())
+			formOfGovernment = FormOfGovernment.MONARCHY;
+		
+		DevelopmentStatus developmentStatus = null;
+		if(this.industrialNationButton.isSelected())
+			developmentStatus = DevelopmentStatus.INDUSTRIALNATION;
+		if(this.emergingNationButton.isSelected())
+			developmentStatus = DevelopmentStatus.EMERGINGNATION;
+		if(this.thirdworldNationButton.isSelected())
+			developmentStatus = DevelopmentStatus.THIRDWORLDNATION;
+		Country country = new Country(nation, formOfGovernment, developmentStatus);
+		return country;
+	}
+	
+	/**
+	 * RESET
+	 * Setzt alle Eingaben im Behälter zurück
+	 */
+	public void reset() {
+		this.nationChoiceBox.getSelectionModel().clearSelection();
 
 	}
 }
