@@ -3,7 +3,7 @@ package mvcOHNETemplate;
 import controller.Geography_Controller;
 import javafx.application.Application;
 import javafx.stage.Stage;
-import model.CountryCollection;
+import model.Geography_Model;
 import view.Geography_View;
 
 //Stufe 0 = Basis MVC Struktur
@@ -20,7 +20,7 @@ import view.Geography_View;
 public class Geography_MVC extends Application {
 	
 	// 0
-	private CountryCollection model; // Model
+	private Geography_Model model; // Model
 	private Geography_View view; // View
 	private Geography_Controller controller; // controller
 
@@ -34,19 +34,12 @@ public class Geography_MVC extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		
-//		// 1. Initialisieren des Models (= Liste aus Country Objekten)
-//		model = new CountryCollection();
-//		// 2. Initialisieren des Controllers (besitzt eine Referenz auf das Model) 
-//		controller = new Geography_Controller(model);
-//		// 3. Initialisieren der View (besitzt eine Referenz auf den Controller)
-//		view = new Geography_View(controller);
-//		// 4. Der Controller erhält mit einem Setter eine Referenz auf die View
-//		controller.setMainView(view);
-		
 		// Initialize the three MVC components
-		this.model = new CountryCollection();
+		this.model = new Geography_Model();
 		this.view = new Geography_View(primaryStage, model);
-		this.controller = new Geography_Controller(model, view);		
+		this.controller = new Geography_Controller(model, view);
+		
+		// Zeigt GUI an sobald alles initialisiert ist
 		view.start();
 		
 	}
