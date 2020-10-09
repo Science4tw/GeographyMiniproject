@@ -13,4 +13,6 @@ public class Geography_Model extends ArrayList<Country> {
 	// UPDATE
 	
 	// SEARCH
+	
+	// WRITE
 }
