@@ -62,7 +62,7 @@ public class Geography_View extends BorderPane {
 		
 		// 0 Create the scene using our layout; then display it
 		Scene scene = new Scene(this);
-//		scene.getStylesheets().add(getClass().getResource("SummaryCSS.css").toExternalForm());
+		scene.getStylesheets().add(getClass().getResource("view.css").toExternalForm());
 		stage.setScene(scene);
 		stage.setTitle("Geography Miniproject");
 		stage.setResizable(true);
