@@ -6,6 +6,9 @@ import javafx.stage.Stage;
 import model.Geography_Model;
 import view.Geography_View;
 
+//Fragen/Probleme: (An Matthias wenden bei Fragen)
+//1. init Methode setLocale auf Deutsch funktioniert noch nicht
+
 //Stufe 0 = Basis MVC Struktur
 //Stufe 1 = Die View
 //Stufe 1.1 Kontrollelemente - Controls used for data processing
@@ -16,6 +19,8 @@ import view.Geography_View;
 //Stufe 3.1 Kontrollelemente unter Action setzen und Data Binding vornehmen
 //Stufe 3.2 Methoden um die Events im Model und View zu bearbeiten
 
+//Stufe GR = Servicelocator für globale Resourcen
+
 // 0
 public class Geography_MVC extends Application {
 	
@@ -23,6 +28,9 @@ public class Geography_MVC extends Application {
 	private Geography_Model model; // Model
 	private Geography_View view; // View
 	private Geography_Controller controller; // controller
+	
+	// GR
+	private ServiceLocator serviceLocator;
 
 	// 0
 	public static void main(String[] args) {
@@ -41,6 +49,17 @@ public class Geography_MVC extends Application {
 		
 		// Zeigt GUI an sobald alles initialisiert ist
 		view.start();
+		
+	}
+	
+	// GR
+	/**
+	 * Initialsiiert beim Programmstart den ServiceLocator
+	 * um die globalen Resourcen der Applikation als Behälter zu verwalten
+	 */
+	public void init() {
+		serviceLocator = new ServiceLocator();
+//		serviceLocator.setLocale(locale_de);
 		
 	}
 
