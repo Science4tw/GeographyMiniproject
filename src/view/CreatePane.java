@@ -10,40 +10,52 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
 import model.Country;
 import model.DevelopmentStatus;
 import model.FormOfGovernment;
 import model.Nation;
+import model.State;
+
+/*
+ * Rote Ränder für Pflichtfelder und Exceptions für Textfelder(nur Zahlen erlaubt)
+ */
 
 public class CreatePane extends GridPane {
 
 	// Kontrollelemente zum hinzufuegen der Objekte
-	private ChoiceBox<Nation> nationChoiceBox; // Auswahl für die Länder
+	
+	// Nation
+	private ChoiceBox<Nation> nationChoiceBox; 
 	private Label lblNation;
 	
+	// State
+	private ChoiceBox<State> stateChoiceBox;
+	private Label lblState;
+
 	// FormOfGovernment
+	private Label lblFormGovernment;
 	private RadioButton democracyButton, dictatorshipButton, monarchyButton;
-	private Label lblFormOfGovernment = new Label("Form of Government:");
-	private HBox formOfGovernmentBox;
+	private HBox hBoxGov;
 	
 	// DevelopmentStatus
+	private Label lblDevelopmentStatus;
 	private RadioButton industrialNationButton, emergingNationButton, thirdworldNationButton;
-	private Label lblDevelopmentStatus = new Label("Development Status:");
-	private HBox developmentStatusBox;
+	private HBox hBoxDev;
 	
-	// State
-	private TextField txtState = new TextField();
-	private Label lblState = new Label("State:");
-	
-	// City
-	
+	// Area
+	private Label lblArea;
+	private TextField txfArea;
+
+	// Population
+	private Label lblPopulation;
+	private TextField txfPopulation;
+
 	// Button zum Hinzufuegen
-	private Button createButton;	
-	
+	private Button createButton;
+
+
 	/**
-	 * Konstruktor um alle Kontrollelemente zu instanziieren
-	 * und diesem Behälter hinzuzufügen
+	 * Konstruktor um alle Kontrollelemente zu instanzieren und Behälter hinzuzufügen
 	 */
 	public CreatePane(Geography_Controller controller) {
 		// ChoiceBox zur Auswahl der Nation
@@ -51,82 +63,130 @@ public class CreatePane extends GridPane {
 		this.add(this.lblNation, 1, 1);
 		this.nationChoiceBox = new ChoiceBox<Nation>();
 		Nation[] nations = Nation.values(); // Liest die Werte des Enums "Nation" aus
-		for (Nation nation : nations) 
+		for (Nation nation : nations)
 			this.nationChoiceBox.getItems().add(nation);
 		this.add(this.nationChoiceBox, 2, 1);
 
-		
-		// RadioButton zur Auswahl der FormOfGovernment (in HBox organisiert)
-		// Auswahl: DEMOCRACY, DICTATORSHIP, MONARCHY
-		this.add(this.lblFormOfGovernment, 1, 2);
-		this.democracyButton = new RadioButton(FormOfGovernment.values()[0].name()); // Liest den ersten(0) Wert des Enums FormOfGovernment aus und speichert diesen unter democrayButton
-		this.dictatorshipButton = new RadioButton(FormOfGovernment.values()[1].name());
-		this.monarchyButton = new RadioButton(FormOfGovernment.values()[2].name());
+		// ChoiceBox zur Auswahl von State
+		this.lblState = new Label("State:");
+		this.add(this.lblState, 1, 2);
+		this.stateChoiceBox = new ChoiceBox<State>();
+		State[] states = State.values(); // Liest die Werte des Enums "State" aus
+		for (State state : states)
+			this.stateChoiceBox.getItems().add(state);
+		this.add(this.stateChoiceBox, 2, 2);
+
+		// Form of Government Label + RadioButtons hinzufügen	
+		this.lblFormGovernment = new Label("Form of Government");
+		this.add(this.lblFormGovernment, 1, 3);
+	
+		this.democracyButton = new RadioButton("Demogracy");
+		this.dictatorshipButton = new RadioButton("Dictatorship");
+		this.monarchyButton = new RadioButton("Monarchy");
 		this.democracyButton.setSelected(true);
-		ToggleGroup fOGGroup = new ToggleGroup();
-		this.democracyButton.setToggleGroup(fOGGroup);
-		this.dictatorshipButton.setToggleGroup(fOGGroup);
-		this.monarchyButton.setToggleGroup(fOGGroup);
-		this.formOfGovernmentBox = new HBox();
-		this.formOfGovernmentBox.getChildren().addAll(this.democracyButton, this.dictatorshipButton, this.monarchyButton);
-		this.add(this.formOfGovernmentBox, 2, 2);
+		ToggleGroup tgGov = new ToggleGroup();//ToggleGroup für RadioButtons
+		this.democracyButton.setToggleGroup(tgGov);
+		this.dictatorshipButton.setToggleGroup(tgGov);
+		this.monarchyButton.setToggleGroup(tgGov);
+		this.hBoxGov = new HBox(); //RadioButtons in HBox
+		this.hBoxGov.getChildren().addAll(this.democracyButton, this.dictatorshipButton, this.monarchyButton);
+		this.add(this.hBoxGov, 2, 3);
+	
+
+		// Developement Status Label + RadioButtons hinzufügen
+		this.lblDevelopmentStatus = new Label("Developement Status");
+		this.add(this.lblDevelopmentStatus, 1, 4);
+		this.industrialNationButton = new RadioButton("Industrialnation");
+		this.emergingNationButton = new RadioButton("Emergingnation");
+		this.thirdworldNationButton = new RadioButton("Thirdworldnation");
+		this.industrialNationButton.setSelected(true);
+		ToggleGroup tgDev = new ToggleGroup(); //ToggleGroup für RadioButtons
+		this.industrialNationButton.setToggleGroup(tgDev);
+		this.emergingNationButton.setToggleGroup(tgDev);
+		this.thirdworldNationButton.setToggleGroup(tgDev);
+		this.hBoxDev = new HBox();//RadioButtons in HBox
+		this.hBoxDev.getChildren().addAll(this.industrialNationButton, this.emergingNationButton, this.thirdworldNationButton);
+		this.add(this.hBoxDev, 2, 4);
 		
-		// RadioButton zur Auswahl des DevelopmentStatus (in HBox organisiert)
-		this.add(this.lblDevelopmentStatus, 1, 3); // Label
-		this.industrialNationButton = new RadioButton(DevelopmentStatus.values()[0].name()); // Liest den ersten(0) Wert des Enums FormOfGovernment aus und speichert diesen unter democrayButton
-		this.emergingNationButton = new RadioButton(DevelopmentStatus.values()[1].name());
-		this.thirdworldNationButton = new RadioButton(DevelopmentStatus.values()[2].name());
-		this.industrialNationButton.setSelected(true);		
-		ToggleGroup dSGroup = new ToggleGroup();
-		this.industrialNationButton.setToggleGroup(dSGroup);
-		this.emergingNationButton.setToggleGroup(dSGroup);
-		this.thirdworldNationButton.setToggleGroup(dSGroup);
-		this.developmentStatusBox = new HBox();
-		this.developmentStatusBox.getChildren().addAll(this.industrialNationButton, this.emergingNationButton, this.thirdworldNationButton);
-		this.add(this.developmentStatusBox, 2, 3);
+		//Population 
+		this.lblPopulation = new Label("Population");
+		this.add(this.lblPopulation, 1, 5);
+		this.txfPopulation = new TextField();
+		this.add(this.txfPopulation, 2, 5);
 		
+		//Area
+		this.lblArea = new Label("Area");
+		this.add(this.lblArea, 1, 6);
+		this.txfArea = new TextField();
+		this.add(this.txfArea, 2, 6);
 		
 		// Button zum hinzufuegen der Objekte
-		this.createButton = new Button("CREATE Object");
-		this.add(this.createButton, 2, 8);
-//		this.createButton.setOnAction(controller::createNewObject);
+		this.createButton = new Button("Create Country");
+		this.add(this.createButton, 2, 7);
+
+
+
+		// CreateButton an Controller
+		//this.createButton.setOnAction(controller::createNewCountry);
 	}
-	
+
 	/**
-	 * GETTER
-	 * um die Kontrollelemente der CreatePane auszulesen
-	 * und mit den ausgewählten Werten ein neues Objekt zu erstellen
+	 * GETTER um die Kontrollelemente der CreatePane auszulesen und mit den
+	 * ausgewählten Werten ein neues Objekt zu erstellen
 	 */
-	public Country getObject() throws Exception{
+	public Country getObject() throws Exception {
 		Nation nation = this.nationChoiceBox.getSelectionModel().getSelectedItem();
 		if (nation == null)
 			throw new EmptyFieldException("No nation selected");
-		
+
+		State state = this.stateChoiceBox.getSelectionModel().getSelectedItem();
+		if (state == null) {
+			throw new EmptyFieldException("No state selected");
+		}
+
 		FormOfGovernment formOfGovernment = null;
-		if(this.democracyButton.isSelected())
+		if (this.democracyButton.isSelected())
 			formOfGovernment = FormOfGovernment.DEMOCRACY;
-		if(this.dictatorshipButton.isSelected())
+		if (this.dictatorshipButton.isSelected())
 			formOfGovernment = FormOfGovernment.DICTATORSHIP;
-		if(this.monarchyButton.isSelected())
+		if (this.monarchyButton.isSelected())
 			formOfGovernment = FormOfGovernment.MONARCHY;
-		
+
 		DevelopmentStatus developmentStatus = null;
-		if(this.industrialNationButton.isSelected())
+		if (this.industrialNationButton.isSelected())
 			developmentStatus = DevelopmentStatus.INDUSTRIALNATION;
-		if(this.emergingNationButton.isSelected())
+		if (this.emergingNationButton.isSelected())
 			developmentStatus = DevelopmentStatus.EMERGINGNATION;
-		if(this.thirdworldNationButton.isSelected())
+		if (this.thirdworldNationButton.isSelected())
 			developmentStatus = DevelopmentStatus.THIRDWORLDNATION;
 		Country country = new Country(nation, formOfGovernment, developmentStatus);
 		return country;
 	}
-	
+
 	/**
-	 * RESET
-	 * Setzt alle Eingaben im Behälter zurück
+	 * GETTER Textfield in Integer umwandeln
+	 */
+
+	// Noch Exception für Texteingaben statt Zahlen einbauen, keine Emptyfield Exception, da nicht Pflichtfeld
+	public int getPopulation() {
+		return Integer.parseInt(this.txfPopulation.getText());
+	}
+
+	// Noch Exception für Texteingaben einbauen
+	public int getArea() {
+		return Integer.parseInt(this.txfArea.getText());
+
+	}
+
+	/**
+	 * RESET Setzt alle Eingaben im Behälter zurück
 	 */
 	public void reset() {
 		this.nationChoiceBox.getSelectionModel().clearSelection();
-
+		this.stateChoiceBox.getSelectionModel().clearSelection();
+		this.democracyButton.setSelected(true);
+		this.industrialNationButton.setSelected(true);
+		this.txfArea.setText("");
+		this.txfPopulation.setText("");
 	}
 }

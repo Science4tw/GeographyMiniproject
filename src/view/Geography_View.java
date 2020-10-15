@@ -7,7 +7,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import model.Country;
 import model.Geography_Model;
@@ -45,6 +44,7 @@ public class Geography_View extends BorderPane {
 	private Label lblStatus;
 
 	// 0 Konstruktor
+	//Kontroller der View mitgeben
 	public Geography_View(Stage stage, Geography_Model model) {
 		this.stage = stage;
 		this.model = model;
@@ -55,6 +55,7 @@ public class Geography_View extends BorderPane {
 				createSearchTab());
 		this.setCenter(this.centerPane);
 
+	
 		
 		// Aktueller Status
 		this.lblStatus = new Label("Everything okay");
@@ -151,7 +152,7 @@ public class Geography_View extends BorderPane {
 		this.lblStatus.setText(string);
 	}
 
-
+	
 
 
 }

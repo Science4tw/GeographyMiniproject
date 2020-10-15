@@ -27,6 +27,7 @@ public class Geography_Controller {
 		} catch (EmptyFieldException exception) {
 			this.view.updateStatus(exception.getMessage());
 		}
+		
 	}
 	
 	// DELETE
