@@ -6,7 +6,7 @@ import javafx.stage.Stage;
 import model.Geography_Model;
 import view.Geography_View;
 
-//Fragen/Probleme: (An Matthias wenden bei Fragen)
+//Fragen/Probleme: 
 //1. init Methode setLocale auf Deutsch funktioniert noch nicht
 
 //Stufe 0 = Basis MVC Struktur

@@ -4,7 +4,7 @@ import java.lang.module.Configuration;
 import java.util.Locale;
 import java.util.logging.Logger;
 
-// Fragen/Probleme: (An Matthias wenden bei Fragen)
+// Fragen/Probleme: 
 // 1. Konstruktor sollte private sein, auf protcted gestellt momentan
 // 		damit in der init() Methode in der Main Klasse keine Fehlermeldung ist
 // 2. Translator -> schlägt momentan noch ungewünschten Import vor
