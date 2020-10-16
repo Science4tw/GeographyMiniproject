@@ -128,7 +128,7 @@ public class Geography_View extends BorderPane {
 		this.searchTab = new Tab();
 		this.searchTab.setClosable(false);
 		this.searchTab.setText("SEARCH Object");
-//		this.updateTab.setContent(this.createPane);		
+		this.searchTab.setContent(this.searchPane);		
 		return this.searchTab;
 	}
 	
