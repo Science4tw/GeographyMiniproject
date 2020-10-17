@@ -7,6 +7,7 @@ import java.util.Scanner;
 import model.Nation;
 import model.DevelopmentStatus;
 import model.FormOfGovernment;
+import model.GovernedRegion;
 import model.Country;
 
 
@@ -19,7 +20,7 @@ public class Initializer {
 	
 	//CountryCollection zur Zeit keine Klasse
 	
-	public static GovernedRegion readItemFile() throws FileNotFoundException {
+	/*public static GovernedRegion readItemFile() throws FileNotFoundException {
 		GovernedRegion initialCountry = new GovernedRegion(); // neue Collection eröffnen
 
 		Scanner fileReader = new Scanner(new File(pathName));
@@ -55,5 +56,5 @@ public class Initializer {
 		Country country = new Country(nation, formOfGovernment, developmentStatus);
 		return country;
 	}
-
+*/
 }
