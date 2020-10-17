@@ -187,7 +187,7 @@ public class CreatePane extends GridPane {
 			developmentStatus = DevelopmentStatus.EMERGINGNATION;
 		if (this.thirdworldNationButton.isSelected())
 			developmentStatus = DevelopmentStatus.THIRDWORLDNATION;
-		Country country = new Country(nation, formOfGovernment, developmentStatus);
+		Country country = new Country(formOfGovernment, developmentStatus);
 		return country;
 	}
 	

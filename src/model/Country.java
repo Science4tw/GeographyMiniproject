@@ -29,6 +29,7 @@ public class Country extends GovernedRegion {
 		this.countryNumber = globalCountryCount++;
 	}
 
+	// TODO: Suche auf alle Attribute erweitern
 	/**
 	 * Gibt true zurück, wenn in einer der Instanzvariablen dieses Objektes die
 	 * Zeichenkette searchString vorkommt (sonst false)
@@ -41,7 +42,7 @@ public class Country extends GovernedRegion {
 	}
 
 	/**
-	 * Zeichenkettenrepräsentation für PlayerCard Objekte
+	 * Zeichenkettenrepräsentation für Country Objekte
 	 */
 	public String toString() {
 		return this + ", " + this.population + ", " + this.area
