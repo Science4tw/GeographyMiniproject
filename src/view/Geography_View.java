@@ -4,6 +4,9 @@ import controller.Geography_Controller;
 import exceptions.EmptyFieldException;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.control.Menu;
+import javafx.scene.control.MenuBar;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.layout.BorderPane;
@@ -39,9 +42,9 @@ public class Geography_View extends BorderPane {
 	private Tab updateTab;
 	private Tab searchTab;
 	
-	
-	// Aktueller Status
+	// Aktueller Status Label
 	private Label lblStatus;
+	
 
 	// 0 Konstruktor
 	//Kontroller der View mitgeben
@@ -55,7 +58,6 @@ public class Geography_View extends BorderPane {
 				createSearchTab());
 		this.setCenter(this.centerPane);
 
-	
 		
 		// Aktueller Status
 		this.lblStatus = new Label("Everything okay");
@@ -81,7 +83,7 @@ public class Geography_View extends BorderPane {
 		this.createPane = new CreatePane(controller);
 		this.createTab = new Tab();
 		this.createTab.setClosable(false);
-		this.createTab.setText("CREATE Object");
+		this.createTab.setText("Create Country");
 		this.createTab.setContent(this.createPane);
 		return this.createTab;
 
@@ -94,7 +96,7 @@ public class Geography_View extends BorderPane {
 		this.deleteTab = new Tab();
 		this.deleteTab.setClosable(false);
 		this.deleteTab.setText("DELETE Object");
-//		this.deleteTab.setContent(this.createPane);
+		this.deleteTab.setContent(this.createPane);
 		return this.deleteTab;
 
 	}
@@ -128,7 +130,7 @@ public class Geography_View extends BorderPane {
 		this.searchTab = new Tab();
 		this.searchTab.setClosable(false);
 		this.searchTab.setText("SEARCH Object");
-//		this.updateTab.setContent(this.createPane);		
+		this.searchTab.setContent(this.searchPane);		
 		return this.searchTab;
 	}
 	
@@ -142,7 +144,7 @@ public class Geography_View extends BorderPane {
 	public Country getCountry() throws Exception{
 		return this.createPane.getObject();
 	}
-	
+			
 	
 	/**
 	 * Methode um den Status zu aktualsieren
@@ -151,6 +153,8 @@ public class Geography_View extends BorderPane {
 		this.createPane.reset();
 		this.lblStatus.setText(string);
 	}
+
+	
 
 	
 

@@ -1,9 +1,11 @@
 package view;
 
+
 import controller.Geography_Controller;
 import exceptions.EmptyFieldException;
+import exceptions.IllegalCharacterException;
 import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
@@ -13,24 +15,26 @@ import javafx.scene.layout.HBox;
 import model.Country;
 import model.DevelopmentStatus;
 import model.FormOfGovernment;
+import model.GEState;
 import model.Nation;
-import model.State;
-
-/*
- * Rote Ränder für Pflichtfelder und Exceptions für Textfelder(nur Zahlen erlaubt)
- */
+import model.CHState;
+import model.AUState;
 
 public class CreatePane extends GridPane {
 
 	// Kontrollelemente zum hinzufuegen der Objekte
 	
 	// Nation
-	private ChoiceBox<Nation> nationChoiceBox; 
+	private ComboBox<Nation> nationComboBox; 
 	private Label lblNation;
 	
-	// State
-	private ChoiceBox<State> stateChoiceBox;
+	// States
 	private Label lblState;
+	
+	private ComboBox<CHState> CHStateComboBox;
+	private ComboBox<GEState> GEStateComboBox;
+	private ComboBox<AUState> AUStateComboBox;
+
 
 	// FormOfGovernment
 	private Label lblFormGovernment;
@@ -58,24 +62,48 @@ public class CreatePane extends GridPane {
 	 * Konstruktor um alle Kontrollelemente zu instanzieren und Behälter hinzuzufügen
 	 */
 	public CreatePane(Geography_Controller controller) {
-		// ChoiceBox zur Auswahl der Nation
+		// ComboBox zur Auswahl der Nation
 		this.lblNation = new Label("Nation:");
 		this.add(this.lblNation, 1, 1);
-		this.nationChoiceBox = new ChoiceBox<Nation>();
+		this.nationComboBox = new ComboBox<Nation>();
 		Nation[] nations = Nation.values(); // Liest die Werte des Enums "Nation" aus
 		for (Nation nation : nations)
-			this.nationChoiceBox.getItems().add(nation);
-		this.add(this.nationChoiceBox, 2, 1);
+			this.nationComboBox.getItems().add(nation);
+		this.add(this.nationComboBox, 2, 1);
 
 		// ChoiceBox zur Auswahl von State
 		this.lblState = new Label("State:");
 		this.add(this.lblState, 1, 2);
-		this.stateChoiceBox = new ChoiceBox<State>();
-		State[] states = State.values(); // Liest die Werte des Enums "State" aus
-		for (State state : states)
-			this.stateChoiceBox.getItems().add(state);
-		this.add(this.stateChoiceBox, 2, 2);
-
+		
+		this.CHStateComboBox = new ComboBox<CHState>();
+		this.GEStateComboBox = new ComboBox<GEState>();
+		this.AUStateComboBox = new ComboBox<AUState>();
+	/*			
+		Nation selection = this.nationComboBox.getSelectionModel().getSelectedItem();
+		switch (selection) {
+		case Switzerland:
+			CHState[] chStates = CHState.values(); // Liest die Werte des Enums "CHstates" aus
+			for (CHState chState : chStates)
+				this.CHStateComboBox.getItems().add(chState);
+			this.add(this.CHStateComboBox, 2, 1);
+			break;
+		case Germany:
+			GEState[] geStates = GEState.values(); // Liest die Werte des Enums "GEStates" aus
+			for (GEState geState : geStates)
+				this.GEStateComboBox.getItems().add(geState);
+			this.add(this.GEStateComboBox, 2, 1);
+			break;
+		case Austria:
+			AUState[] auStates = AUState.values(); // Liest die Werte des Enums "AuStates" aus
+			for (AUState auState : auStates)
+				this.AUStateComboBox.getItems().add(auState);
+			this.add(this.AUStateComboBox, 2, 1);
+			break;
+		default:
+			break;
+			
+		}
+		*/
 		// Form of Government Label + RadioButtons hinzufügen	
 		this.lblFormGovernment = new Label("Form of Government");
 		this.add(this.lblFormGovernment, 1, 3);
@@ -123,9 +151,7 @@ public class CreatePane extends GridPane {
 		// Button zum hinzufuegen der Objekte
 		this.createButton = new Button("Create Country");
 		this.add(this.createButton, 2, 7);
-
-
-
+		
 		// CreateButton an Controller
 		//this.createButton.setOnAction(controller::createNewCountry);
 	}
@@ -134,16 +160,18 @@ public class CreatePane extends GridPane {
 	 * GETTER um die Kontrollelemente der CreatePane auszulesen und mit den
 	 * ausgewählten Werten ein neues Objekt zu erstellen
 	 */
-	public Country getObject() throws Exception {
-		Nation nation = this.nationChoiceBox.getSelectionModel().getSelectedItem();
+		public Country getObject() throws Exception {
+		Nation nation = this.nationComboBox.getSelectionModel().getSelectedItem();
 		if (nation == null)
+			//this.nationComboBox.setBorder(Color.RED);
 			throw new EmptyFieldException("No nation selected");
-
-		State state = this.stateChoiceBox.getSelectionModel().getSelectedItem();
+/*
+		CHState state = this.CHStateComboBox.getSelectionModel().getSelectedItem();
 		if (state == null) {
+			this.CHstateComboBox.setBorder(Color.RED);
 			throw new EmptyFieldException("No state selected");
 		}
-
+*/
 		FormOfGovernment formOfGovernment = null;
 		if (this.democracyButton.isSelected())
 			formOfGovernment = FormOfGovernment.DEMOCRACY;
@@ -162,18 +190,30 @@ public class CreatePane extends GridPane {
 		Country country = new Country(nation, formOfGovernment, developmentStatus);
 		return country;
 	}
+	
 
 	/**
 	 * GETTER Textfield in Integer umwandeln
+	 * @throws IllegalCharacterException 
 	 */
 
+	
 	// Noch Exception für Texteingaben statt Zahlen einbauen, keine Emptyfield Exception, da nicht Pflichtfeld
-	public int getPopulation() {
+	public int getPopulation() throws IllegalCharacterException {
+		if (this.txfPopulation.getText() != "[0-9]") {
+			//this.lblPopulation.setTextFill(Color.RED);
+			throw new IllegalCharacterException("Wrong Character, only digits");
+			}
 		return Integer.parseInt(this.txfPopulation.getText());
 	}
 
-	// Noch Exception für Texteingaben einbauen
-	public int getArea() {
+	// Noch Exception für Texteingaben einbauen, Farbe ROT
+	public int getArea() throws IllegalCharacterException {
+		
+		if (this.txfArea.getText() != "[0-9]") {
+		//	this.lblArea.setTextFill(Color.RED);
+			throw new IllegalCharacterException("Wrong Character, only digits");
+			}
 		return Integer.parseInt(this.txfArea.getText());
 
 	}
@@ -182,8 +222,10 @@ public class CreatePane extends GridPane {
 	 * RESET Setzt alle Eingaben im Behälter zurück
 	 */
 	public void reset() {
-		this.nationChoiceBox.getSelectionModel().clearSelection();
-		this.stateChoiceBox.getSelectionModel().clearSelection();
+		this.nationComboBox.getSelectionModel().clearSelection();
+		this.CHStateComboBox.getSelectionModel().clearSelection();
+		this.GEStateComboBox.getSelectionModel().clearSelection();
+		this.AUStateComboBox.getSelectionModel().clearSelection();
 		this.democracyButton.setSelected(true);
 		this.industrialNationButton.setSelected(true);
 		this.txfArea.setText("");
