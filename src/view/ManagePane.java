@@ -15,7 +15,7 @@ import javafx.scene.layout.VBox;
 import model.Country;
 import model.GovernedRegion;
 
-public class SearchPane extends GridPane {
+public class ManagePane extends GridPane {
 	
 	private Label lblSearch;
 	private TextField txtSearch;
@@ -24,7 +24,7 @@ public class SearchPane extends GridPane {
 	private ListView<GovernedRegion> resultList;
 	
 	
-	public SearchPane(Geography_Controller controller) {
+	public ManagePane(Geography_Controller controller) {
 		// Label um das
 		this.lblSearch = new Label("Searchstate");
 		this.add(this.lblSearch, 1, 1);

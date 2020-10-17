@@ -3,7 +3,7 @@ package mvcOHNETemplate;
 import controller.Geography_Controller;
 import javafx.application.Application;
 import javafx.stage.Stage;
-import model.Geography_Model;
+import model.GovRegCollection;
 import view.Geography_View;
 
 //Fragen/Probleme: 
@@ -25,7 +25,7 @@ import view.Geography_View;
 public class Geography_MVC extends Application {
 	
 	// 0
-	private Geography_Model model; // Model
+	private GovRegCollection model; // Model
 	private Geography_View view; // View
 	private Geography_Controller controller; // controller
 	
@@ -43,7 +43,7 @@ public class Geography_MVC extends Application {
 	public void start(Stage primaryStage) throws Exception {
 		
 		// Initialize the three MVC components
-		this.model = new Geography_Model();
+		this.model = new GovRegCollection();
 		this.view = new Geography_View(primaryStage, model);
 		this.controller = new Geography_Controller(model, view);
 		

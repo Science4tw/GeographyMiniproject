@@ -8,7 +8,7 @@ import javafx.event.Event;
 import model.Country;
 import model.DevelopmentStatus;
 import model.FormOfGovernment;
-import model.Geography_Model;
+import model.GovRegCollection;
 
 import model.Nation;
 import model.GovernedRegion;
@@ -18,11 +18,11 @@ import view.Geography_View;
 public class Geography_Controller {
 
 	// 0
-	private Geography_Model model;
+	private GovRegCollection model;
 	private Geography_View view;
 
 	// 0
-	public Geography_Controller(Geography_Model model, Geography_View view) {
+	public Geography_Controller(GovRegCollection model, Geography_View view) {
 
 	}
 

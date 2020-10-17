@@ -12,7 +12,7 @@ import javafx.scene.control.TabPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import model.Country;
-import model.Geography_Model;
+import model.GovRegCollection;
 
 // 0
 public class Geography_View extends BorderPane {
@@ -22,25 +22,19 @@ public class Geography_View extends BorderPane {
 
 	// 0 View muss das Model und die Stage kennen
 	private Stage stage;
-	private Geography_Model model;
+	private GovRegCollection model;
 
 	// 1
 	// Die Behälter um die CRUD Funktionalitäten zu implementieren + SEARCH
 	private CreatePane createPane;
-	private DeletePane deletePane;
-	private ReadPane readPane;
-	private UpdatePane updatePane;
-	private SearchPane searchPane;
+	private ManagePane managePane;
 
 	// 1 TABPane um die Tabs zu organisieren
 	private TabPane centerPane;
 
 	// 1 CREATE, DELETE, READ, UPDATE TABs + SEARCH
 	private Tab createTab;
-	private Tab deleteTab;
-	private Tab readTab;
-	private Tab updateTab;
-	private Tab searchTab;
+	private Tab manageTab;
 	
 	// Aktueller Status Label
 	private Label lblStatus;
@@ -48,14 +42,13 @@ public class Geography_View extends BorderPane {
 
 	// 0 Konstruktor
 	//Kontroller der View mitgeben
-	public Geography_View(Stage stage, Geography_Model model) {
+	public Geography_View(Stage stage, GovRegCollection model) {
 		this.stage = stage;
 		this.model = model;
 
 		// 1 TabPane for CREATE, READ, UPDATE, DELETE, SEARCH
 		this.centerPane = new TabPane();
-		this.centerPane.getTabs().addAll(createCreateTab(), createDeleteTab(), createReadTab(), createUpdateTab(),
-				createSearchTab());
+		this.centerPane.getTabs().addAll(createCreateTab(), createManageTab());
 		this.setCenter(this.centerPane);
 
 		
@@ -90,48 +83,21 @@ public class Geography_View extends BorderPane {
 	}
 
 	// 1 DELTE
-	// DeletePane
-	public Tab createDeleteTab() {
-		this.deletePane = new DeletePane(controller);
-		this.deleteTab = new Tab();
-		this.deleteTab.setClosable(false);
-		this.deleteTab.setText("DELETE Object");
-		this.deleteTab.setContent(this.createPane);
-		return this.deleteTab;
-
-	}
 
 	// 1 Read
-	// ReadPane
-	public Tab createReadTab() {
-		this.readPane = new ReadPane(controller);
-		this.readTab = new Tab();
-		this.readTab.setClosable(false);
-		this.readTab.setText("READ Object");
-//		this.readTab.setContent(this.createPane);		
-		return this.readTab;
-	}
+
 
 	// 1 UPDATE
-	// UpdatePane
-	public Tab createUpdateTab() {
-		this.updatePane = new UpdatePane(controller);
-		this.updateTab = new Tab();
-		this.updateTab.setClosable(false);
-		this.updateTab.setText("UPDATE Object");
-//		this.updateTab.setContent(this.createPane);		
-		return this.updateTab;
-	}
 
 	// 1 SEARCH
 	// SearchPane
-	public Tab createSearchTab() {
-		this.searchPane = new SearchPane(controller);
-		this.searchTab = new Tab();
-		this.searchTab.setClosable(false);
-		this.searchTab.setText("SEARCH Object");
-		this.searchTab.setContent(this.searchPane);		
-		return this.searchTab;
+	public Tab createManageTab() {
+		this.managePane = new ManagePane(controller);
+		this.manageTab = new Tab();
+		this.manageTab.setClosable(false);
+		this.manageTab.setText("Manage Objects");
+		this.manageTab.setContent(this.managePane);		
+		return this.manageTab;
 	}
 	
 

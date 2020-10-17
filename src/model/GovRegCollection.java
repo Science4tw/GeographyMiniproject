@@ -2,15 +2,12 @@ package model;
 
 import java.util.ArrayList;
 
-
-
-
-public class Geography_Model {
+public class GovRegCollection {
 	
 	private ArrayList<GovernedRegion> collection;
 	
 
-	public Geography_Model() {
+	public GovRegCollection() {
 		this.collection = new ArrayList<GovernedRegion>();
 	}
 	
