@@ -25,14 +25,16 @@ public class GovRegCollection {
 	// SEARCH
 	public ArrayList<GovernedRegion> search(String searchString) { // ArrayList wird zurück gegeben
 		ArrayList<GovernedRegion> result = new ArrayList<GovernedRegion>(); // Behälter für Rückgabe
-		for (GovernedRegion p : this.collection) {// durch Liste iterieren, für jedes Objekt aus DIESER collection
-			if (p.containsSearchString(searchString)) { // containsSearchString = ausgelagerte Methode
-				result.add(p);
+		for (GovernedRegion govReg : this.collection) {
+			if (govReg.contains(searchString)) {
+				result.add(govReg);
 			}
 		}
-		return result;
-
-	}	
+		if (result.size() > 0)
+			return result;
+		else
+			return null;
+	}
 	// WRITE
 	
 	public String toString() {
