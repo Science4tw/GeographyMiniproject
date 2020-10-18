@@ -23,6 +23,12 @@ public class GovRegCollection {
 	// UPDATE
 	
 	// SEARCH
+	/**
+	 * Gibt eine Liste von Objekten zurück, deren
+	 * Instanzvariablen die Zeichenkette searchString enthalten
+	 * (falls keine entsprechende Karte existiert, wird das leere Objekt 
+	 * null zurückgegeben)
+	 */
 	public ArrayList<GovernedRegion> search(String searchString) { // ArrayList wird zurück gegeben
 		ArrayList<GovernedRegion> result = new ArrayList<GovernedRegion>(); // Behälter für Rückgabe
 		for (GovernedRegion govReg : this.collection) {

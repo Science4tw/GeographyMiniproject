@@ -46,23 +46,23 @@ public class Geography_Controller {
 
 	// SEARCH
 	/**
-	 * Den vom user im textfield eingegeben Suchbegriff speichern Speichert in einer
-	 * lokalen Liste die = In der ArrayList sucht man nach dem Suchbegriff Zeigt die
-	 * Suche in der ListView an Aktualisiert den Status
-	 * 
+	 * Wird ausgeführt, sobald in der View eine Suche gestartet wird
+	 * Den vom user im textfield eingegeben Suchbegriff speicher.
+	 * Speichert in einer lokalen Liste die = In der ArrayList sucht man nach dem Suchbegriff
+	 * Zeigt die Suche in der ListView an Aktualisiert den Status
 	 * @param event
 	 */
-
-	/*
-	 * public void searchGovernedRegion(Event event) { String searchString =
-	 * view.searchPane.getSearchString(); ArrayList<GovernedRegion> result =
-	 * model.collection.search(searchString); // Search = methode in
-	 * playcardcollection, erwartet ArrayList<PlayerCard>
-	 * this.searchPane.setResult(result); // setResult = neue Methode in
-	 * SearchPlayerView this.view.setStatus("Suche durchgeführt"); // setStatus =
-	 * neue Methode in PlayerCardMainView }
-	 * 
-	 */
+	public void search(Event event) {
+		// 1. Speichere Suchbegriff
+		String searchString = view.getSearchString();
+		// 2. Loakle ArrayList um die Resultate der Suche zu speichern
+		// und Suche in der Collection nach dem Suchbegriff
+		ArrayList<GovernedRegion> result = this.model.search(searchString);
+		// 3. Setze das Resultat
+		this.view.setResult(result);
+		this.view.updateStatus("Suche durchgeführt");
+		// 4
+	}
 
 	/**
 	 * SETTER für die View

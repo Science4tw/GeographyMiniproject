@@ -1,5 +1,7 @@
 package view;
 
+import java.util.ArrayList;
+
 import controller.Geography_Controller;
 import exceptions.EmptyFieldException;
 import javafx.scene.Scene;
@@ -13,6 +15,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import model.Country;
 import model.GovRegCollection;
+import model.GovernedRegion;
 
 // 0
 public class Geography_View extends BorderPane {
@@ -119,8 +122,19 @@ public class Geography_View extends BorderPane {
 		this.createPane.reset();
 		this.lblStatus.setText(string);
 	}
-
-	
+	/**
+	 * Getter für die eingegebene Zeichenkette  
+	 * aus dem Suchbehälter
+	 */
+	public String getSearchString() {
+		return this.managePane.getSearchString();
+	}
+	/**
+	 * Setter für das Suchergebnis im Suchbehälter
+	 */
+	public void setResult(ArrayList<GovernedRegion> result) {
+		this.managePane.setResult(result);
+	}
 
 	
 
