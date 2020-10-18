@@ -3,8 +3,8 @@ package model;
 public enum CHState {
 
 	Aargau, AppenzellAusserrhoden, AppenzellInnerrhoden, BaselLandschaft, BaselStadt, Bern, Freiburg, Genf, Glarus,
-	Graubünden, Jura, Luzern, Neuenburg, Nidwalden, Obwalden, StGallen, Schaffhausen, Schwyz, Solothurn, Tessin,
-	Thurgau, Uri, Waadt, Wallis, Zürich, Zug;
+	Graubunden, Jura, Luzern, Neuenburg, Nidwalden, Obwalden, StGallen, Schaffhausen, Schwyz, Solothurn, Tessin,
+	Thurgau, Uri, Waadt, Wallis, Zuerich, Zug;
 
 	// Überprüft ob searchString in diesem Namen vorkommt
 

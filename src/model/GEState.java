@@ -2,8 +2,8 @@ package model;
 
 public enum GEState {
 
-	BadenWürttemberg, Bayern, Berlin, Brandenburg, Bremen, Hamburg, Hessen, MecklenburgVorpommern, Niedersachsen,
-	NordrheinWestfalen, RheinlandPfalz, Saarland, Sachsen, SachsenAnhalt, SchleswigHolstein, Thüringen;
+	BadenWuerttemberg, Bayern, Berlin, Brandenburg, Bremen, Hamburg, Hessen, MecklenburgVorpommern, Niedersachsen,
+	NordrheinWestfalen, RheinlandPfalz, Saarland, Sachsen, SachsenAnhalt, SchleswigHolstein, Thueringen;
 
 	public boolean contains(String searchString) {
 		return (this.name().contains(searchString));
